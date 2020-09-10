@@ -55,3 +55,9 @@ vimp.nnoremap('<leader>r', function()
   print("Reloaded vimrc!")
 end)
 
+vimp.bind({'repeatable'}, '[e', ':move--<cr>')
+vimp.bind({'repeatable'}, ']e', ':move+<cr>')
+
+-- When we hit escape in the middle of a leader chord, make that a <nop>
+vimp.addChordCancellations('n', '<leader>')
+
