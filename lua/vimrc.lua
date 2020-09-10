@@ -1,5 +1,6 @@
 
 require('vimp')
+util = require('vimrc.util')
 
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -29,13 +30,28 @@ end)
 -- Keep the cursor in place while joining lines
 vimp.nnoremap('J', 'mzJ`z')
 
-vimp.nnoremap('<leader>ev', ':vsplit ~/.config/nvim/plugged/vimpeccable-lua-vimrc-example/lua/vimrc.lua<cr>')
+vimp.nnoremap('<leader>ev', ':vsplit ~/.config/nvim/plugged/vimpeccable-lua-vimrc-advanced-example/lua/vimrc.lua<cr>')
 -- Or:
--- vimp.nnoremap('<leader>ev', [[:vsplit ~/.config/nvim/plugged/vimpeccable-lua-vimrc-example/lua/vimrc.lua<cr>]])
+-- vimp.nnoremap('<leader>ev', [[:vsplit ~/.config/nvim/plugged/vimpeccable-lua-vimrc-advanced-example/lua/vimrc.lua<cr>]])
 -- Or:
 -- vimp.nnoremap('<leader>ev', function()
---   vim.cmd('vsplit ~/.config/nvim/plugged/vimpeccable-lua-vimrc-example/lua/vimrc.lua')
+--   vim.cmd('vsplit ~/.config/nvim/plugged/vimpeccable-lua-vimrc-advanced-example/lua/vimrc.lua')
 -- end)
 
 vim.cmd('colorscheme gruvbox')
+
+-- r = reload vimrc
+vimp.nnoremap('<leader>r', function()
+  -- Remove all previously added vimpeccable maps
+  vimp.unmapAll()
+  -- Unload the lua namespace so that the next time require('vimrc.X') is called
+  -- it will reload it
+  util.unloadLuaNamespace('vimrc')
+  -- Make sure all open buffers are saved
+  vim.cmd('silent wa')
+  -- Execute our vimrc lua file again to add back our maps
+  require('vimrc')
+
+  print("Reloaded vimrc!")
+end)
 
