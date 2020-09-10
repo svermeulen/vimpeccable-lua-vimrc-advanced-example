@@ -6,6 +6,8 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.incsearch = true
 
+vim.o.hidden = true
+
 vim.o.history = 5000
 
 vim.o.tabstop = 4
