@@ -45,10 +45,10 @@ vim.cmd('colorscheme gruvbox')
 -- r = reload vimrc
 vimp.nnoremap('<leader>r', function()
   -- Remove all previously added vimpeccable maps
-  vimp.unmapAll()
+  vimp.unmap_all()
   -- Unload the lua namespace so that the next time require('vimrc.X') is called
   -- it will reload it
-  util.unloadLuaNamespace('vimrc')
+  util.unload_lua_namespace('vimrc')
   -- Make sure all open buffers are saved
   vim.cmd('silent wa')
   -- Execute our vimrc lua file again to add back our maps
@@ -61,5 +61,5 @@ vimp.bind({'repeatable'}, '[e', ':move--<cr>')
 vimp.bind({'repeatable'}, ']e', ':move+<cr>')
 
 -- When we hit escape in the middle of a leader chord, make that a <nop>
-vimp.addChordCancellations('n', '<leader>')
+vimp.add_chord_cancellations('n', '<leader>')
 
